@@ -61,7 +61,7 @@ rules.add_rule('q_to_start', 'z', 'q4', 'z', 'r')
 rules.add_rule('q4', '0', 'q4', '0', 'r')
 rules.add_rule('q4', '1', 'q4', '1', 'r')
 rules.add_rule('q4', '#', 'q_swap_hash', '+', 'r')
-rules.add_rule('q4', ' ', 'q4', ' ', 'r')
+rules.add_rule('q4', '_', 'q4', '_', 'r')
 
 # Pravidla pro stav 'q_swap_hash'
 rules.add_rule('q_swap_hash', '#', 'q_sum', '#', 'l')
@@ -71,7 +71,7 @@ rules.add_rule('q_swap_hash', '0', 'q_swap_hash', '0', 'r')
 # Čtení bitů
 rules.add_rule('q_sum', '1', 'q_save1', 'c', 'l')
 rules.add_rule('q_sum', '0', 'q_save0', 'c', 'l')
-rules.add_rule('q_sum', '+', 'q_update', ' ', 'l')
+rules.add_rule('q_sum', '+', 'q_update', '_', 'l')
 
 # Práce s bitem 1
 rules.add_rule('q_save1', '0', 'q_save1', '0', 'l')
@@ -88,14 +88,14 @@ rules.add_rule('q_replace1', '0', 'q_delete1', 'I', 'r')
 rules.add_rule('q_replace1', '1', 'q_carry', 'O', 'l')
 rules.add_rule('q_replace1', 'O', 'q_replace1', 'O', 'l')
 rules.add_rule('q_replace1', 'I', 'q_replace1', 'I', 'l')
-rules.add_rule('q_replace1', ' ', 'q_replace1', ' ', 'l')
+rules.add_rule('q_replace1', '_', 'q_replace1', '_', 'l')
 
 # Připočítání bitu 0
 rules.add_rule('q_replace0', '0', 'q_delete0', 'O', 'r')
 rules.add_rule('q_replace0', '1', 'q_delete0', 'I', 'r')
 rules.add_rule('q_replace0', 'O', 'q_replace0', 'O', 'l')
 rules.add_rule('q_replace0', 'I', 'q_replace0', 'I', 'l')
-rules.add_rule('q_replace0', ' ', 'q_replace0', ' ', 'l')
+rules.add_rule('q_replace0', '_', 'q_replace0', '_', 'l')
 
 # Vymazání dočasného symbolu při práci s 1
 rules.add_rule('q_delete1', '0', 'q_delete1', '0', 'r')  # Pokračuje doprava přes 0
@@ -103,8 +103,8 @@ rules.add_rule('q_delete1', '1', 'q_delete1', '1', 'r')  # Pokračuje doprava p�
 rules.add_rule('q_delete1', 'O', 'q_delete1', 'O', 'r')  # Pokračuje doprava přes O
 rules.add_rule('q_delete1', 'I', 'q_delete1', 'I', 'r')  # Pokračuje doprava přes I
 rules.add_rule('q_delete1', '+', 'q_delete1', '+', 'r')  # Pokračuje doprava přes +
-rules.add_rule('q_delete1', ' ', 'q_delete1', ' ', 'r')  # Pokračuje doprava přes mezeru
-rules.add_rule('q_delete1', 'c', 'q_sum', ' ', 'l')  # Vymaže c a vrátí se do stavu 'q_sum'
+rules.add_rule('q_delete1', '_', 'q_delete1', '_', 'r')  # Pokračuje doprava přes mezeru
+rules.add_rule('q_delete1', 'c', 'q_sum', '_', 'l')  # Vymaže c a vrátí se do stavu 'q_sum'
 
 # Vymazání dočasného symbolu při práci s 0
 rules.add_rule('q_delete0', '0', 'q_delete0', '0', 'r')  # Pokračuje doprava přes 0
@@ -112,21 +112,21 @@ rules.add_rule('q_delete0', '1', 'q_delete0', '1', 'r')  # Pokračuje doprava p�
 rules.add_rule('q_delete0', 'O', 'q_delete0', 'O', 'r')  # Pokračuje doprava přes O
 rules.add_rule('q_delete0', 'I', 'q_delete0', 'I', 'r')  # Pokračuje doprava přes I
 rules.add_rule('q_delete0', '+', 'q_delete0', '+', 'r')  # Pokračuje doprava přes +
-rules.add_rule('q_delete0', ' ', 'q_delete0', ' ', 'r')  # Pokračuje doprava přes mezeru
-rules.add_rule('q_delete0', 'c', 'q_sum', ' ', 'l')   # Vymaže c a vrátí se do stavu 'q_sum'
+rules.add_rule('q_delete0', '_', 'q_delete0', '_', 'r')  # Pokračuje doprava přes mezeru
+rules.add_rule('q_delete0', 'c', 'q_sum', '_', 'l')   # Vymaže c a vrátí se do stavu 'q_sum'
 
 # Přenos bitu
 rules.add_rule('q_carry', '0', 'q_delete1', '1', 'r')    # Přenese 1, pokud narazí na 0
 rules.add_rule('q_carry', 'z', 'q_delete1', '1', 'r')    # Přenese 1, pokud narazí na z
 rules.add_rule('q_carry', '1', 'q_carry', '0', 'l')  # Přenese 0 a pokračuje vlevo
-rules.add_rule('q_carry', ' ', 'q_carry', ' ', 'l')  # Pokračuje vlevo, pokud narazí na mezeru
+rules.add_rule('q_carry', ' ', 'q_carry', '_', 'l')  # Pokračuje vlevo, pokud narazí na mezeru
 rules.add_rule('q_carry', '+', 'q_carry', '+', 'l')  # Pokračuje vlevo přes +
 rules.add_rule('q_carry', 'O', 'q_carry', 'O', 'l')  # Pokračuje vlevo přes O
 rules.add_rule('q_carry', 'I', 'q_carry', 'I', 'l')  # Pokračuje vlevo přes I
-rules.add_rule('q_carry', 'c', 'q_sum', ' ', 'l')     # Vrací se do stavu 'q_sum' po přenosu
+rules.add_rule('q_carry', 'c', 'q_sum', '_', 'l')     # Vrací se do stavu 'q_sum' po přenosu
 
 
-rules.add_rule('q_update', ' ', 'q_update', ' ', 'l')  # Zůstává mezera a pohybuje se doleva
+rules.add_rule('q_update', '_', 'q_update', '_', 'l')  # Zůstává mezera a pohybuje se doleva
 rules.add_rule('q_update', 'I', 'q_update', '1', 'l')  # Přepisuje I na 1 a pohybuje se doleva
 rules.add_rule('q_update', 'O', 'q_update', '0', 'l')  # Přepisuje O na 0 a pohybuje se doleva
 rules.add_rule('q_update', '1', 'q_update', '1', 'l')  # Zůstává 1 a pohybuje se doleva
