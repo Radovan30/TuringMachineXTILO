@@ -3,7 +3,7 @@ class TuringMachine:
         self.rules = rules
         self.current_state = start_state
         self.head_position = 0
-        self.tape = list(tape) + ['_'] * (100 - len(tape))  # Doplnění pásky prázdnými symboly
+        self.tape = list(tape) + ['#'] * (100 - len(tape))  # Doplnění pásky prázdnými symboly
 
         # Vytisknutí počátečního stavu pásky
         # self.print_tape()
@@ -34,7 +34,20 @@ class TuringMachine:
         # Získáme symbol pod hlavou a okolní část pásky
         left_part = "".join(self.tape[:self.head_position])
         current_symbol = self.tape[self.head_position]
-        right_part = "".join(self.tape[self.head_position + 1:]).rstrip('_')  # Odstranění prázdných symbolů na konci
+        right_part = "".join(self.tape[self.head_position + 1:]).rstrip('#')  # Odstranění prázdných symbolů na konci
 
         # Vytiskneme aktuální stav v požadovaném formátu
         print(f"{self.current_state} {left_part}[{current_symbol}]{right_part}")
+
+    def print_soft_tape(self):
+        # Vytvoříme kopii pásky
+        tape_copy = self.tape[:]
+
+        # Přidáme symbol pásky s formátováním pro hlavu
+        tape_copy[self.head_position] = f"[{self.tape[self.head_position]}]"
+
+        # Připojíme pásku jako text a odstraníme nadbytečné '#'
+        formatted_tape = "".join(tape_copy).replace('#', '').strip()
+
+        # Vytiskneme pásku s hlavou
+        print(formatted_tape)

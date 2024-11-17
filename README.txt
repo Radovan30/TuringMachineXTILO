@@ -31,4 +31,7 @@ Architektura projektu
 
 Autor: Radovan Němec
 
-Tento projekt je dostupný pod licencí MIT. Viz LICENSE.md pro více informací.
+Použité zdroje:
+    https://turingmachine.io/
+    https://www.cs.princeton.edu/courses/archive/fall17/cos126/lectures/CS.15.Turing-2x2.pdf
+    https://stackoverflow.com/questions/59045832/turing-machine-for-addition-and-comparison-of-binary-numbers
