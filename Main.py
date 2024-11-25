@@ -153,7 +153,7 @@ rules.add_rule('q_delete0', 'c', 'q_sum', '_', 'l')   # Vymaže c a vrátí se d
 rules.add_rule('q_carry', '0', 'q_delete1', '1', 'r')    # Přenese 1, pokud narazí na 0
 rules.add_rule('q_carry', 'z', 'q_delete1', '1', 'r')    # Přenese 1, pokud narazí na z
 rules.add_rule('q_carry', '1', 'q_carry', '0', 'l')  # Přenese 0 a pokračuje vlevo
-rules.add_rule('q_carry', ' ', 'q_carry', '_', 'l')  # Pokračuje vlevo, pokud narazí na mezeru
+rules.add_rule('q_carry', '_', 'q_carry', '_', 'l')  # Pokračuje vlevo, pokud narazí na mezeru
 rules.add_rule('q_carry', '+', 'q_carry', '+', 'l')  # Pokračuje vlevo přes +
 rules.add_rule('q_carry', 'O', 'q_carry', 'O', 'l')  # Pokračuje vlevo přes O
 rules.add_rule('q_carry', 'I', 'q_carry', 'I', 'l')  # Pokračuje vlevo přes I
