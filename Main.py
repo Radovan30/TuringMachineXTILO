@@ -24,10 +24,44 @@ tape = "#101#10#110#"       # 1101
 # q_replace1     - přídání
 # q_carry        - přenos bitů
 
+# Mapa stavů do binárních kódů
+states = {
+    'q_start': '0000',
+    'q1': '0001',
+    'q2': '0010',
+    'q3': '0011',
+    'q_go_end': '0100',
+    'q_to_start': '0101',
+    'q4': '0110',
+    'q_swap_hash': '0111',
+    'q_sum': '1000',
+    'q_save1': '1001',
+    'q_save0': '1010',
+    'q_replace1': '1011',
+    'q_replace0': '1100',
+    'q_delete1': '1101',
+    'q_delete0': '1110',
+    'q_carry': '1111',
+    'q_update': '0000'  # Recyklace kódu pro q_update
+}
+
+# Mapa symbolů do binárních kódů
+symbols = {
+    '0': '000',
+    '1': '001',
+    '#': '010',
+    'z': '011',
+    '+': '100',
+    'c': '101',
+    'O': '110',
+    'I': '111',
+    '_': '000'  # Recyklace prázdného symbolu
+}
+
 
 # Definovat jednotlivé přechodové stavy
 # Přidávání pravidel pomocí metody add_rule  ('q_start', '_'): ('q0', '_', 'r'),
-rules = Rule()
+rules = Rule(states, symbols)
 
 # Zapíše 'z' na začátek čísel
 rules.add_rule('q_start', '1', 'q_start', '1', 'l'),
@@ -151,3 +185,6 @@ while tm.step():
 
     # Vypíše aktuální stav pásky při každém kroku (jen páska s čísly bez # - > z[1]0110110 )
      tm.print_soft_tape()
+
+# Vytiskně zakódované pravidla Turingova stroje
+rules.print_rules_binary()

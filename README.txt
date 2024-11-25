@@ -1,6 +1,6 @@
 Simulátor Turingova stroje
 
-    Tento projekt implementuje simulátor Turingova stroje pro provádění sčítání tří binárních čísel.
+    Tento projekt implementuje simulátor Turingova stroje pro provádění sčítání tří binárních čísel a zakódovaní jednotlivých stavů a symbolů do binární podoby.
 
 Vstupní parametry:
 
